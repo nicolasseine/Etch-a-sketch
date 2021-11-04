@@ -36,7 +36,7 @@ Array.from(cells).forEach((div) => {
     })
 });
 
-//Adding button to clear the grid
+//Adding button to clear grid
 clearButton = document.querySelector("#clear-grid");
 clearButton.onclick = clearGrid;
 

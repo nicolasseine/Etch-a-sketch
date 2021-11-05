@@ -13,21 +13,45 @@
 <body>
     <header></header>
 
-    <aside class="menu"></aside>
+    <aside class="menu">
+
+        <!-- Slider code made by Shashank sharma : https://codepen.io/shashank_coder/pen/jOqxOpK -->
+        <div class="slider">
+            <span id="rangeValue">16 x 16</span>
+            <Input id="grid-size" class="range" type="range" name "" value="0" min="16" max="100"
+                onChange="updateAndCreateGrid(this.value)" onmousemove=" rangeSlide(this.value)"></Input>
+            <script type="text/javascript">
+                function rangeSlide(value) {
+                    document.getElementById('rangeValue').innerHTML = value + " x " + value;
+                }
+
+                function updateAndCreateGrid(value) {
+                    rangeSlide(value);
+                    setTimeout(createGrid(), 1000);
+                }
+            </script>
+        </div>
+
+        <button id=clear-grid>Reset !</button>
+
+
+
+    </aside>
+
 
     <main>
-        <button id=clear-grid>Reset !</button>
-        <form>
+        <!-- <form>
             <label for="grid-size">Choisir une résolution</label>
-            <input type="number" id="grid-size" name="grid-size" min=16 max=100>
+            <input type="number" id="grid-size" name="grid-size" min=8 max=100>
             <button type="button" onclick="createGrid()"> Valider </button>
-        </form>
+        </form> -->
 
         <div id="main-grid">
 
         </div>
 
     </main>
+
 </body>
 
 </html>

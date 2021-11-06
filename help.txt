@@ -1,24 +1,12 @@
-Hello !
-Working on my etch-a-sketch, I can't understand why my code does not work with 
-a for (cell in cells)
+I've spent 3 hours yesterday wondering why I can't make `element.style.backgroundColor()`
+work properly :
 
-```
-const cells = grid.getElementsByClassName("cell");
-for (cell in cells) {
-    cell.addEventListener('mouseenter', (e) => {
-        e.target.classList.add("greyed")
+On the following script, the class is removed but the inline background-color remains the same :
+```function clearGrid() {
+    Array.from(cells).forEach((cell) => {
+        cell.style.backgroundColor = "white";
+        cell.classList.remove("painted");
     })
 };```
-
-
-but it works when I use forEach
-```
-const cells = grid.getElementsByClassName("cell");
-Array.from(cells).forEach((cell) => {
-    cell.addEventListener('mouseenter',
-        (e) => {
-            e.target.classList.add("greyed")
-        })
-});```
-
-I presumed both would work the same way...
+I also tried with `cell.style.remove("background-color")`, which doen't do anything either...
+I'm lost here !

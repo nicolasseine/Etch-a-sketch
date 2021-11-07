@@ -76,6 +76,7 @@ main {
     background-color: white;
     justify-self: center;
     align-self: center;
+    box-shadow: 1em 1em 0.7em #264653;
 }
 
 .cell {

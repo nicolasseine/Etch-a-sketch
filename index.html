@@ -19,35 +19,26 @@
         <div class="slider">
             <span id="rangeValue">16 x 16</span>
             <Input id="grid-size" class="range" type="range" name "" value="0" min="16" max="100"
-                onChange="updateAndCreateGrid(this.value)" onmousemove=" rangeSlide(this.value)"></Input>
-            <script type="text/javascript">
-                function rangeSlide(value) {
-                    document.getElementById('rangeValue').innerHTML = value + " x " + value;
-                }
-
-                function updateAndCreateGrid(value) {
-                    rangeSlide(value);
-                    setTimeout(createGrid(), 1000);
-                }
-            </script>
+                onChange="updateAndCreateGrid(this.value)" onmousemove=" rangeSlide(this.value)">
+            </Input>
         </div>
 
         <button id=clear-grid>Reset !</button>
 
-
+        <div class="options mode">
+            <Input onchange="updateMode()" class=" range" id="mode" type="range" value="1" min="1" max="4">
+            <p id="selected-mode-display"></p>
+        </div>
+        <div class="options"><input type="color" id="color-picker" value="#404040">
+            <label for="color-picker">Choisir une couleur</label></div>
+        <div class="options"><input type="checkbox" id="toggle-lines"> <label for="toggle-lines">Afficher / masquer la
+                grille</label></div>
 
     </aside>
 
-
     <main>
-        <!-- <form>
-            <label for="grid-size">Choisir une résolution</label>
-            <input type="number" id="grid-size" name="grid-size" min=8 max=100>
-            <button type="button" onclick="createGrid()"> Valider </button>
-        </form> -->
 
         <div id="main-grid">
-
         </div>
 
     </main>

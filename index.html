@@ -11,7 +11,9 @@
 </head>
 
 <body>
-    <header></header>
+    <header>
+        <h1>L'ardoise magique</h1>
+    </header>
 
     <aside class="menu">
 
@@ -23,16 +25,42 @@
             </Input>
         </div>
 
-        <button id=clear-grid>Reset !</button>
 
-        <div class="options mode">
-            <Input onchange="updateMode()" class=" range" id="mode" type="range" value="1" min="1" max="4">
+        <form class="options" id="mode-selection-form">
+            <div class="mode-option">
+                <input type="radio" name="color-mode" id="black" value="black" checked>
+                <label for="black">Noir</label>
+            </div>
+
+            <div class="mode-option">
+                <input type="radio" name="color-mode" id="rainbow" value="rainbow">
+                <label for="rainbow">Arc-en-ciel !</label>
+            </div>
+
+            <div class="mode-option">
+                <input type="radio" name="color-mode" id="grey" value="grey">
+                <label for="grey">Nuances de gris</label>
+            </div>
+
+            <div class="mode-option">
+                <input type="radio" name="color-mode" id="picked" value="picked">
+                <label for="picked">Choisir une couleur</label>
+            </div>
+
+            <div class="mode-option">
+                <input type="radio" name="color-mode" id="eraser" value="eraser">
+                <label for="eraser">Gomme</label>
+            </div>
+            <!-- <Input onchange="updateMode()" class=" range" id="mode" type="range" value="1" min="1" max="4"> -->
             <p id="selected-mode-display"></p>
-        </div>
+
+        </form>
+
         <div class="options"><input type="color" id="color-picker" value="#404040">
             <label for="color-picker">Choisir une couleur</label></div>
-        <div class="options"><input type="checkbox" id="toggle-lines"> <label for="toggle-lines">Afficher / masquer la
-                grille</label></div>
+
+        <button id=clear-grid>Reset !</button>
+
 
     </aside>
 

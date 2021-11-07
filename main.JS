@@ -19,7 +19,7 @@ function createGrid(n) {
 
     for (let i = 0; i < (n * n); i++) {
         const cell = document.createElement('div');
-        cell.className = 'cell';
+        cell.className = 'cell greyable';
         gridBuffer.appendChild(cell);
         grid.style.gridTemplateRows = `repeat(${n}, 1fr)`; //Changing grid css 
         grid.style.gridTemplateColumns = `repeat(${n}, 1fr)`; // properties to resize cells
@@ -39,26 +39,10 @@ function createGrid(n) {
 
 // 3.Enable choosing drawing mode
 
-const modeSelector = document.getElementById("mode");
-let selectedMode = modeSelector.value;
-console.log(selectedMode);
+const modeSelector = document.getElementById("mode-selection-form");
+let selectedMode = document.querySelector('input[name="color-mode"]:checked').value;
+modeSelector.addEventListener('change', e => selectedMode = e.target.value);
 
-function updateMode() {
-    const cells = grid.querySelectorAll(".cell");
-
-    selectedMode = document.getElementById("mode").value;
-    selectedModeDisplay.textContent = (selectedMode === "1") ? "Noir" : (selectedMode === "2") ? "aléatoire" : (selectedMode === "3") ? "gris" : "au choix";
-    if (selectedMode === "3") {
-        for (let cell of cells) {
-            if (!cell.classList.contains("colored")) {
-                cell.style.backgroundColor = "rgba(0,0,0,0)";
-            }
-            cell.classList.add("greyable");
-
-
-        }
-    }
-}
 
 
 // 4. Coloring cells when mouse hovers
@@ -83,13 +67,12 @@ function color(element, selectedMode) {
 
     switch (selectedMode) {
 
-        case "1": // black
+        case "black":
             element.style.backgroundColor = "#000";
             element.classList.add("colored");
-            console.log("ok");
             break;
 
-        case "2": // rainbow
+        case "rainbow":
             const random = n => Math.floor(Math.random() * (n + 1));
             let r = random(255);
             let g = random(255);
@@ -97,32 +80,45 @@ function color(element, selectedMode) {
             let rgb = `rgb(${r},${g},${b})`;
             element.style.backgroundColor = rgb;
             element.classList.add("colored");
+            element.classList.add("rainbowed");
             break;
-        case "3": //grey
+
+        case "grey":
             element.classList.add("colored");
+            //Prevent cells already turned black to turn lighter (see below)
             if (element.classList.contains("greyable")) {
+
+                // Prevents rainbowed cell from turning black
+                if (element.classList.contains("rainbowed")) {
+                    element.style.backgroundColor = "rgba(0,0,0,0)";
+                    element.classList.remove("rainbowed");
+                }
+
+                //Extracting the alpha value from the color name string in rgba
                 const currentColor = `" ${element.style.backgroundColor}"`;
                 let alpha = +(currentColor.slice(currentColor.lastIndexOf(",") + 1,
                     currentColor.lastIndexOf(')')));
-                console.log(alpha);
                 let newalpha = alpha + 0.1;
                 if (newalpha == 1) {
                     element.classList.remove("greyable");
                 }
-                console.log(newalpha);
                 const newColor = `rgba(0,0,0,${newalpha})`;
                 element.style.backgroundColor = newColor;
             }
             break;
-        case "4": //color selector:
+
+        case "picked":
             element.style.backgroundColor = pickedColor;
+            element.classList.add("colored");
+            element.classList.add("rainbowed");
+
+            break;
+
+        case "eraser":
+            element.style.backgroundColor = "white";
             element.classList.remove("colored");
     }
 }
-
-
-
-
 
 //5 Button to clear grid
 
@@ -132,8 +128,7 @@ function clearGrid() {
     Array.from(cells).forEach((cell) => {
         cell.classList.remove("colored");
         cell.classList.add("greyable");
-        cell.style.backgroundColor = "white";
-        updateMode();
+        cell.style.backgroundColor = "rgba(0,0,0,0)";
     });
 }
 
@@ -159,4 +154,3 @@ function updateAndCreateGrid(pixels) {
 }
 
 createGrid(size);
-updateMode();

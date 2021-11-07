@@ -20,6 +20,7 @@ function createGrid(n) {
     for (let i = 0; i < (n * n); i++) {
         const cell = document.createElement('div');
         cell.className = 'cell greyable';
+        cell.style.backgroundColor = "rgba(0,0,0,0)";
         gridBuffer.appendChild(cell);
         grid.style.gridTemplateRows = `repeat(${n}, 1fr)`; //Changing grid css 
         grid.style.gridTemplateColumns = `repeat(${n}, 1fr)`; // properties to resize cells
@@ -40,9 +41,16 @@ function createGrid(n) {
 // 3.Enable choosing drawing mode
 
 const modeSelector = document.getElementById("mode-selection-form");
-let selectedMode = document.querySelector('input[name="color-mode"]:checked').value;
-modeSelector.addEventListener('change', e => selectedMode = e.target.value);
+let selectedMode = "black";
+modeSelector.addEventListener('click', e => changeMode(e));
 
+function changeMode(e) {
+    let ancientMode = document.getElementById(selectedMode);
+    ancientMode.classList.remove("active-drawing-mode");
+    selectedMode = e.target.id;
+    e.target.classList.add("active-drawing-mode");
+    colorPicker.style.visibility = (selectedMode === "picked") ? "visible" : "hidden";
+}
 
 
 // 4. Coloring cells when mouse hovers
@@ -115,7 +123,7 @@ function color(element, selectedMode) {
             break;
 
         case "eraser":
-            element.style.backgroundColor = "white";
+            element.style.backgroundColor = "rgba(0, 0, 0, 0)";
             element.classList.remove("colored");
     }
 }
@@ -137,7 +145,7 @@ clearButton.addEventListener("click", clearGrid);
 
 // 6. Color picker
 let pickedColor = colorPicker.value;
-colorPicker.addEventListener('change', () =>
+colorPicker.addEventListener('input', () =>
     pickedColor = colorPicker.value);
 
 

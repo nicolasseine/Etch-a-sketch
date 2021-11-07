@@ -26,38 +26,30 @@
         </div>
 
 
-        <form class="options" id="mode-selection-form">
-            <div class="mode-option">
-                <input type="radio" name="color-mode" id="black" value="black" checked>
-                <label for="black">Noir</label>
+        <div id="mode-selection-form">
+            <div class="mode-option active-drawing-mode" id="black">
+                Noir
             </div>
 
-            <div class="mode-option">
-                <input type="radio" name="color-mode" id="rainbow" value="rainbow">
-                <label for="rainbow">Arc-en-ciel !</label>
+            <div class="mode-option" id="rainbow">
+                Arc-en-ciel
             </div>
 
-            <div class="mode-option">
-                <input type="radio" name="color-mode" id="grey" value="grey">
-                <label for="grey">Nuances de gris</label>
+            <div class="mode-option" id="grey">
+                Nuances de gris
             </div>
 
-            <div class="mode-option">
-                <input type="radio" name="color-mode" id="picked" value="picked">
-                <label for="picked">Choisir une couleur</label>
+            <div class="mode-option" id=eraser>
+                Gomme
             </div>
 
-            <div class="mode-option">
-                <input type="radio" name="color-mode" id="eraser" value="eraser">
-                <label for="eraser">Gomme</label>
+            <div class="mode-option" id=picked>
+                Choisir une couleur
             </div>
-            <!-- <Input onchange="updateMode()" class=" range" id="mode" type="range" value="1" min="1" max="4"> -->
-            <p id="selected-mode-display"></p>
 
-        </form>
+        </div>
 
-        <div class="options"><input type="color" id="color-picker" value="#404040">
-            <label for="color-picker">Choisir une couleur</label></div>
+        <input type="color" id="color-picker" value="#2a9d8f">
 
         <button id=clear-grid>Reset !</button>
 

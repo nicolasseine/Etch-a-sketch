@@ -1,12 +1,4 @@
-// Define global variables and constants
-
 const grid = document.getElementById("main-grid");
-
-
-
-
-
-//Enable choosing drawing mode
 
 const modeSelector = document.getElementById("mode-selection-form");
 let selectedMode = "black";
@@ -20,8 +12,6 @@ function changeMode(e) {
     colorPicker.style.opacity = (selectedMode === "picked") ? "100%" : "0";
 }
 
-
-// Main drawing function
 function draw() {
     const cells = grid.querySelectorAll(".cell");
     Array.from(cells).forEach((cell) => {
@@ -87,15 +77,12 @@ function color(element, selectedMode) {
             element.classList.add("rainbowed");
             break;
 
-
         case "eraser":
             element.style.backgroundColor = "rgba(0, 0, 0, 0)";
             element.classList.remove("colored");
             break;
     }
 }
-
-//Reset button
 
 clearButton = document.querySelector("#clear-grid");
 clearButton.addEventListener("click", clearGrid);
@@ -124,10 +111,11 @@ sizeChooser.addEventListener('input', (e) => displaySize(e.target.value));
 function displaySize(pixels) {
     document.getElementById("rangeValue").innerHTML = pixels + " x " + pixels;
 }
+
+
 //Grid creation functions on grid size change and on startup
 
 sizeChooser.addEventListener('change', (e) => setTimeout(createGrid(e.target.value), 500));
-
 
 function createGrid(n) {
 
@@ -147,7 +135,6 @@ function createGrid(n) {
 
     draw();
 }
-
 
 // When page loads, creates a 16x16 grid
 createGrid(16);

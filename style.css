@@ -16,8 +16,6 @@ header {
 
 }
 
-/*Main grid and cells style */
-
 main {
     grid-column: span 4;
     display: flex;
@@ -45,8 +43,6 @@ main {
 .cell:hover {
     cursor: crosshair;
 }
-
-/*Aside menu style*/
 
 aside {
     grid-column: 1;
@@ -104,7 +100,6 @@ aside {
     transform: scale(1.1);
 }
 
-
 /* Slider code made by Shashank sharma : https: //codepen.io/shashank_coder/pen/jOqxOpK */
 .slider {
     display: flex;
@@ -138,5 +133,3 @@ aside {
     cursor: pointer;
     box-shadow: -407px 0 0 400px;
 }
-
-/* End of slider code */

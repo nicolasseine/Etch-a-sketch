@@ -113,7 +113,7 @@ function displaySize(pixels) {
 }
 
 
-sizeChooser.addEventListener('change', (e) => setTimeout(createGrid(e.target.value), 500));
+sizeChooser.addEventListener('change', (e) => createGrid(e.target.value));
 
 function createGrid(n) {
 

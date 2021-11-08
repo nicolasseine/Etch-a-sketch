@@ -83,12 +83,14 @@ aside {
 }
 
 #color-picker {
-    border: none;
+    all: unset;
     background-color: none;
     width: 60%;
     height: 3em;
     margin-top: -10%;
-    visibility: hidden;
+    opacity: 0;
+    border-radius: 50%;
+    transition: linear, 600ms;
 }
 
 #clear-grid {

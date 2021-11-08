@@ -17,7 +17,7 @@ function changeMode(e) {
     ancientMode.classList.remove("active-drawing-mode");
     selectedMode = e.target.id;
     e.target.classList.add("active-drawing-mode");
-    colorPicker.style.visibility = (selectedMode === "picked") ? "visible" : "hidden";
+    colorPicker.style.opacity = (selectedMode === "picked") ? "100%" : "0";
 }
 
 

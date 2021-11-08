@@ -1,44 +1,12 @@
 // Define global variables and constants
 
 const grid = document.getElementById("main-grid");
-const selectedModeDisplay = document.getElementById("selected-mode-display");
-const colorPicker = document.getElementById("color-picker");
-let gridBuffer = document.createDocumentFragment();
-const size = document.getElementById("grid-size").value;
 
 
 
 
 
-// 2. Generate a new grid depending on the size inputted
-
-function createGrid(n) {
-
-
-    grid.innerHTML = ''; // empty current grid
-
-    for (let i = 0; i < (n * n); i++) {
-        const cell = document.createElement('div');
-        cell.className = 'cell greyable';
-        cell.style.backgroundColor = "rgba(0,0,0,0)";
-        gridBuffer.appendChild(cell);
-        grid.style.gridTemplateRows = `repeat(${n}, 1fr)`; //Changing grid css 
-        grid.style.gridTemplateColumns = `repeat(${n}, 1fr)`; // properties to resize cells
-
-    }
-
-    grid.appendChild(gridBuffer);
-
-    grid.style.gridTemplateRows = `repeat(${n}, 1 fr)`;
-    grid.style.gridTemplateColumns = `repeat(${n}, 1 fr)`;
-
-    //and enable drawing
-    draw();
-}
-
-
-
-// 3.Enable choosing drawing mode
+//Enable choosing drawing mode
 
 const modeSelector = document.getElementById("mode-selection-form");
 let selectedMode = "black";
@@ -53,12 +21,9 @@ function changeMode(e) {
 }
 
 
-// 4. Coloring cells when mouse hovers
-// listen for hovering
-
+// Main drawing function
 function draw() {
     const cells = grid.querySelectorAll(".cell");
-
     Array.from(cells).forEach((cell) => {
         cell.addEventListener('mouseenter',
             (e) => {
@@ -67,11 +32,7 @@ function draw() {
     });
 }
 
-// changing color depending on selected mode 
-
 function color(element, selectedMode) {
-    console.log(selectedMode);
-    console.log(typeof selectedMode);
 
     switch (selectedMode) {
 
@@ -81,11 +42,13 @@ function color(element, selectedMode) {
             break;
 
         case "rainbow":
+            //Getting a random RGB color
             const random = n => Math.floor(Math.random() * (n + 1));
             let r = random(255);
             let g = random(255);
             let b = random(255);
             let rgb = `rgb(${r},${g},${b})`;
+
             element.style.backgroundColor = rgb;
             element.classList.add("colored");
             element.classList.add("rainbowed");
@@ -93,6 +56,7 @@ function color(element, selectedMode) {
 
         case "grey":
             element.classList.add("colored");
+
             //Prevent cells already turned black to turn lighter (see below)
             if (element.classList.contains("greyable")) {
 
@@ -107,9 +71,11 @@ function color(element, selectedMode) {
                 let alpha = +(currentColor.slice(currentColor.lastIndexOf(",") + 1,
                     currentColor.lastIndexOf(')')));
                 let newalpha = alpha + 0.1;
+
                 if (newalpha == 1) {
                     element.classList.remove("greyable");
                 }
+
                 const newColor = `rgba(0,0,0,${newalpha})`;
                 element.style.backgroundColor = newColor;
             }
@@ -119,16 +85,20 @@ function color(element, selectedMode) {
             element.style.backgroundColor = pickedColor;
             element.classList.add("colored");
             element.classList.add("rainbowed");
-
             break;
+
 
         case "eraser":
             element.style.backgroundColor = "rgba(0, 0, 0, 0)";
             element.classList.remove("colored");
+            break;
     }
 }
 
-//5 Button to clear grid
+//Reset button
+
+clearButton = document.querySelector("#clear-grid");
+clearButton.addEventListener("click", clearGrid);
 
 function clearGrid() {
     const cells = grid.querySelectorAll(".cell");
@@ -140,25 +110,44 @@ function clearGrid() {
     });
 }
 
-clearButton = document.querySelector("#clear-grid");
-clearButton.addEventListener("click", clearGrid);
-
-// 6. Color picker
+// Minor functions : color picker and display of grid size
+const colorPicker = document.getElementById("color-picker");
 let pickedColor = colorPicker.value;
+
 colorPicker.addEventListener('input', () =>
     pickedColor = colorPicker.value);
 
 
+const sizeChooser = document.getElementById("grid-size");
+sizeChooser.addEventListener('input', (e) => displaySize(e.target.value));
 
-
-// slider functions
-function rangeSlide(pixels) {
+function displaySize(pixels) {
     document.getElementById("rangeValue").innerHTML = pixels + " x " + pixels;
 }
+//Grid creation functions on grid size change and on startup
 
-function updateAndCreateGrid(pixels) {
-    rangeSlide(pixels);
-    setTimeout(createGrid(pixels), 1000);
+sizeChooser.addEventListener('change', (e) => setTimeout(createGrid(e.target.value), 500));
+
+
+function createGrid(n) {
+
+    let gridBuffer = document.createDocumentFragment();
+
+    grid.innerHTML = ''; // empty current grid
+
+    for (let i = 0; i < (n * n); i++) {
+        const cell = document.createElement('div');
+        cell.className = 'cell greyable';
+        cell.style.backgroundColor = "rgba(0,0,0,0)";
+        gridBuffer.appendChild(cell);
+        grid.style.gridTemplateRows = `repeat(${n}, 1fr)`;
+        grid.style.gridTemplateColumns = `repeat(${n}, 1fr)`;
+    }
+    grid.appendChild(gridBuffer);
+
+    draw();
 }
 
-createGrid(size);
+
+// When page loads, creates a 16x16 grid
+createGrid(16);

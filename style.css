@@ -1,20 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap');
+
 body {
     background-color: #2a9d8f;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    font-family: Arial, Helvetica, sans-serif;
+    grid-template-columns: repeat(5, 1fr);
+    font-family: 'Balsamiq Sans', cursive;
 }
 
 header {
     text-align: center;
-    grid-column: 2 /span 3;
+    grid-column: 2 /span 4;
     color: white;
+    font-weight: 400;
+    font-size: 1.2em;
+
 }
 
 /*Main grid and cells style */
 
 main {
-    grid-column: span 3;
+    grid-column: span 4;
     display: flex;
     justify-content: center;
     align-content: center;
@@ -63,7 +68,7 @@ aside {
     padding: 0.5em;
     background-color: #e76f51;
     color: rgb(231, 231, 231);
-    font-weight: bold;
+    font-weight: 400;
     transition: 0.1s;
 }
 
@@ -84,6 +89,17 @@ aside {
     height: 3em;
     margin-top: -10%;
     visibility: hidden;
+}
+
+#clear-grid {
+    color: #e76f51;
+    font-weight: 700;
+    font-size: 1.1em;
+}
+
+#clear-grid:hover {
+    cursor: pointer;
+    transform: scale(1.1);
 }
 
 

@@ -113,15 +113,16 @@ function displaySize(pixels) {
 }
 
 
-//Grid creation functions on grid size change and on startup
-
 sizeChooser.addEventListener('change', (e) => setTimeout(createGrid(e.target.value), 500));
 
 function createGrid(n) {
 
     let gridBuffer = document.createDocumentFragment();
 
-    grid.innerHTML = ''; // empty current grid
+    //Empty the grid
+    while (grid.firstChild) {
+        grid.removeChild(grid.firstChild);
+    }
 
     for (let i = 0; i < (n * n); i++) {
         const cell = document.createElement('div');
@@ -136,5 +137,4 @@ function createGrid(n) {
     draw();
 }
 
-// When page loads, creates a 16x16 grid
 createGrid(16);
